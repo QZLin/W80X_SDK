@@ -107,7 +107,7 @@ int demo_iperf_auto_test(u8 *ssid, u8 csmode, u8 remoteIP, u8 bgnrate, u8 pcrate
         return WM_FAILED;;
     }
 
-    if(csmode)		//iperf ×÷Îª·şÎñ¶Ë
+    if(csmode)		//iperf ä½œä¸ºæœåŠ¡ç«¯
     {
         printf("iperf test sever start\n");
         iperf_start(csmode, destip[2] - 100, interval, maxcnt, iperfLocalPort, severIp);

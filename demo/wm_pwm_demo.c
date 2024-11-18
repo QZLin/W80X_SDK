@@ -164,7 +164,7 @@ static void pwm_isr_callback(void)
     }
     else
     {
-        if(status&0x40)              //œ¬Ωµ—ÿ÷–∂œ
+        if(status&0x40)              //‰∏ãÈôçÊ≤ø‰∏≠Êñ≠
         {
             if((status&300) == 0)
             {
@@ -173,7 +173,7 @@ static void pwm_isr_callback(void)
             tls_reg_write32(HR_PWM_INTSTS, tls_reg_read32(HR_PWM_INTSTS) & 0x40);
             printf("fcount = %d\n",fcount);
         }
-        if(status&0x00000020)              //…œ…˝—ÿ÷–∂œ
+        if(status&0x00000020)              //‰∏äÂçáÊ≤ø‰∏≠Êñ≠
         {
             if((status&0x00000280) == 0)
             {

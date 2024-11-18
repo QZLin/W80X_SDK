@@ -32,49 +32,49 @@ static void demo_gpio_isr_callback(void *context)
 	}
 }
 
-//gpio ≤‚ ‘≥Ã–Ú
+//gpio ÊµãËØïÁ®ãÂ∫è
 int gpio_demo(void)
 {
 	u16 gpio_pin;
 	u16 ret;
 
-	//≤‚ ‘gpioB 6,7
+	//ÊµãËØïgpioB 6,7
 	for(gpio_pin = WM_IO_PB_06; gpio_pin <= WM_IO_PB_07; gpio_pin ++)
 	{
 		tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
-		ret = tls_gpio_read(gpio_pin);	/*œ»∂¡ƒ¨»œ◊¥Ã¨*/
+		ret = tls_gpio_read(gpio_pin);	/*ÂÖàËØªÈªòËÆ§Áä∂ÊÄÅ*/
 		printf("\ngpio%c[%d] default value==[%d]\n", (gpio_pin >= WM_IO_PB_00) ?'B':'A', (gpio_pin >= WM_IO_PB_00) ?(gpio_pin - WM_IO_PB_00):gpio_pin,ret);
 
 		/*During gpio's floating attribute, output high or low test*/
 		tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-		tls_gpio_write(gpio_pin,1);			/*–¥∏ﬂ*/
+		tls_gpio_write(gpio_pin,1);			/*ÂÜôÈ´ò*/
 		ret = tls_gpio_read(gpio_pin);
 		printf("\ngpio%c[%d] floating high value==[%d]\n", (gpio_pin >= WM_IO_PB_00) ? 'B':'A', (gpio_pin >= WM_IO_PB_00) ?(gpio_pin - WM_IO_PB_00):gpio_pin,ret);
 
 		tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_FLOATING);
-		tls_gpio_write(gpio_pin,0);			/*–¥µÕ*/
+		tls_gpio_write(gpio_pin,0);			/*ÂÜô‰Ωé*/
 		ret = tls_gpio_read(gpio_pin);
 		printf("\ngpio%c[%d] floating low value==[%d]\n", (gpio_pin >= WM_IO_PB_00) ? 'B':'A', (gpio_pin >= WM_IO_PB_00) ?(gpio_pin - WM_IO_PB_00):gpio_pin,ret);
 
 		/*During gpio's pullup attribute, output high or low test*/
 		tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
-		tls_gpio_write(gpio_pin,1);			/*–¥∏ﬂ*/
+		tls_gpio_write(gpio_pin,1);			/*ÂÜôÈ´ò*/
 		ret = tls_gpio_read(gpio_pin);
 		printf("\ngpio%c[%d] pullhigh value==[%d]\n", (gpio_pin >= WM_IO_PB_00) ?'B':'A', (gpio_pin >= WM_IO_PB_00) ?(gpio_pin - WM_IO_PB_00):gpio_pin,ret);
 
 		tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLHIGH);
-		tls_gpio_write(gpio_pin,0);			/*–¥µÕ*/
+		tls_gpio_write(gpio_pin,0);			/*ÂÜô‰Ωé*/
 		ret = tls_gpio_read(gpio_pin);
 		printf("\ngpio%c[%d] pullhigh value==[%d]\n", (gpio_pin >= WM_IO_PB_00) ? 'B':'A', (gpio_pin >= WM_IO_PB_00) ?(gpio_pin - WM_IO_PB_00):gpio_pin,ret);
 
 		/*During gpio's pulldown attribute, output high or low test*/
 		tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);
-		tls_gpio_write(gpio_pin,1);			/*–¥∏ﬂ*/
+		tls_gpio_write(gpio_pin,1);			/*ÂÜôÈ´ò*/
 		ret = tls_gpio_read(gpio_pin);
 		printf("\ngpio%c[%d] pulllow value==[%d]\n", (gpio_pin >= WM_IO_PB_00) ?'B':'A', (gpio_pin >= WM_IO_PB_00) ?(gpio_pin - WM_IO_PB_00):gpio_pin,ret);
 
 		tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_OUTPUT, WM_GPIO_ATTR_PULLLOW);
-		tls_gpio_write(gpio_pin,0); 		/*–¥µÕ*/
+		tls_gpio_write(gpio_pin,0); 		/*ÂÜô‰Ωé*/
 		ret = tls_gpio_read(gpio_pin);
 		printf("\ngpio%c[%d] pulllow value==[%d]\n", (gpio_pin >= WM_IO_PB_00) ? 'B':'A', (gpio_pin >= WM_IO_PB_00) ?(gpio_pin - WM_IO_PB_00):gpio_pin,ret);
 
@@ -90,7 +90,7 @@ int gpio_isr_test(void)
 
 	gpio_pin = DEMO_ISR_IO;
 
-	//≤‚ ‘÷–∂œ
+	//ÊµãËØï‰∏≠Êñ≠
 	tls_gpio_cfg(gpio_pin, WM_GPIO_DIR_INPUT, WM_GPIO_ATTR_FLOATING);
 	tls_gpio_isr_register(gpio_pin, demo_gpio_isr_callback, NULL);
 	tls_gpio_irq_enable(gpio_pin, WM_GPIO_IRQ_TRIG_RISING_EDGE);

@@ -114,7 +114,7 @@ int aes_hard_demo(void)
 
 	tls_crypto_init();
 
-	in = tls_mem_alloc(1024);		//AES ±ØĞëÊÇ16µÄÕûÊı±¶£¬·ñÔò»á³ö´í
+	in = tls_mem_alloc(1024);		//AES å¿…é¡»æ˜¯16çš„æ•´æ•°å€ï¼Œå¦åˆ™ä¼šå‡ºé”™
 	out1 = tls_mem_alloc(1024);
 	out2 = tls_mem_alloc(1024);
 	key = tls_mem_alloc(16);
