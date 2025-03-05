@@ -274,7 +274,7 @@ void tls_uart_init(void)
     tls_cmd_register_set_uart1_sock_param(uart_set_uart1_sock_param);
     if (hif->hostif_mode == HOSTIF_MODE_UART1_HS)
     {
-    //¸ù¾Ýflash¶ÁÈ¡µÄ²ÎÊýÅäÖÃ´®¿Ú¼Ä´æÆ÷ 
+    //æ ¹æ®flashè¯»å–çš„å‚æ•°é…ç½®ä¸²å£å¯„å­˜å™¨ 
         uart_opts.baudrate = uart_cfg.baudrate;
         uart_opts.charlength = TLS_UART_CHSIZE_8BIT;
         uart_opts.flow_ctrl = (enum TLS_UART_FLOW_CTRL_MODE) uart_cfg.flow;
@@ -292,7 +292,7 @@ void tls_uart_init(void)
     }
     else if (hif->hostif_mode == HOSTIF_MODE_UART1_LS)
     {
-    //¸ù¾Ýflash¶ÁÈ¡µÄ²ÎÊýÅäÖÃ´®¿Ú¼Ä´æÆ÷ 
+    //æ ¹æ®flashè¯»å–çš„å‚æ•°é…ç½®ä¸²å£å¯„å­˜å™¨ 
         uart_opts.baudrate = uart_cfg.baudrate;
         if (uart_cfg.charsize == 0)
         {
@@ -321,7 +321,7 @@ void tls_uart_init(void)
         else
 #endif // TLS_CONFIG_SOCKET_RAW
         {
-            uart->cmd_mode = UART_ATCMD_MODE;   // Ö¸ÁîÄ£Ê½¹Ø±ÕÁ÷¿Ø
+            uart->cmd_mode = UART_ATCMD_MODE;   // æŒ‡ä»¤æ¨¡å¼å…³é—­æµæŽ§
             tls_uart_set_fc_status(uart->uart_port->uart_no,
                                    TLS_UART_FLOW_CTRL_NONE);
         }
@@ -521,25 +521,25 @@ struct tls_uart *tls_uart_open(u32 uart_no, TLS_UART_MODE_T uart_mode)
 #endif
     {
 #if 0
-    /* ´´½¨uart ·¢ËÍÈÎÎñºÍÐÅºÅÁ¿ */
+    /* åˆ›å»ºuart å‘é€ä»»åŠ¡å’Œä¿¡å·é‡ */
         if (uart_no == TLS_UART_0)
         {
             stk = tls_mem_alloc(UART0_TX_TASK_STK_SIZE * sizeof(u32));
             if (!stk)
                 return NULL;
             memset(stk, 0, UART0_TX_TASK_STK_SIZE * sizeof(u32));
-            tls_os_task_create(NULL, "uart_0_tx", tls_uart_0_tx_task, (void *) uart, (void *) stk,  /* ÈÎÎñÕ»µÄÆðÊ¼µØÖ·
+            tls_os_task_create(NULL, "uart_0_tx", tls_uart_0_tx_task, (void *) uart, (void *) stk,  /* ä»»åŠ¡æ ˆçš„èµ·å§‹åœ°å€
                                                                                                      */
-                               UART0_TX_TASK_STK_SIZE * sizeof(u32),    /* ÈÎÎñÕ»µÄ´óÐ¡
+                               UART0_TX_TASK_STK_SIZE * sizeof(u32),    /* ä»»åŠ¡æ ˆçš„å¤§å°
                                                                          */
                                TLS_UART0_TX_TASK_PRIO, 0);
             stk = tls_mem_alloc(UART0_RX_TASK_STK_SIZE * sizeof(u32));
             if (!stk)
                 return NULL;
             memset(stk, 0, UART0_RX_TASK_STK_SIZE * sizeof(u32));
-            tls_os_task_create(NULL, "uart_0_rx", tls_uart_0_rx_task, (void *) uart, (void *) stk,  /* ÈÎÎñÕ»µÄÆðÊ¼µØÖ·
+            tls_os_task_create(NULL, "uart_0_rx", tls_uart_0_rx_task, (void *) uart, (void *) stk,  /* ä»»åŠ¡æ ˆçš„èµ·å§‹åœ°å€
                                                                                                      */
-                               UART0_RX_TASK_STK_SIZE * sizeof(u32),    /* ÈÎÎñÕ»µÄ´óÐ¡
+                               UART0_RX_TASK_STK_SIZE * sizeof(u32),    /* ä»»åŠ¡æ ˆçš„å¤§å°
                                                                          */
                                TLS_UART0_RX_TASK_PRIO, 0);
 
@@ -550,18 +550,18 @@ struct tls_uart *tls_uart_open(u32 uart_no, TLS_UART_MODE_T uart_mode)
             if (!stk)
                 return NULL;
             memset(stk, 0, UART1_TX_TASK_STK_SIZE * sizeof(u32));
-            tls_os_task_create(NULL, "uart_1_tx", tls_uart_1_tx_task, (void *) uart, (void *) stk,  /* ÈÎÎñÕ»µÄÆðÊ¼µØÖ·
+            tls_os_task_create(NULL, "uart_1_tx", tls_uart_1_tx_task, (void *) uart, (void *) stk,  /* ä»»åŠ¡æ ˆçš„èµ·å§‹åœ°å€
                                                                                                      */
-                               UART1_TX_TASK_STK_SIZE * sizeof(u32),    /* ÈÎÎñÕ»µÄ´óÐ¡
+                               UART1_TX_TASK_STK_SIZE * sizeof(u32),    /* ä»»åŠ¡æ ˆçš„å¤§å°
                                                                          */
                                TLS_UART1_TX_TASK_PRIO, 0);
             stk = tls_mem_alloc(UART1_RX_TASK_STK_SIZE * sizeof(u32));
             if (!stk)
                 return NULL;
             memset(stk, 0, UART1_RX_TASK_STK_SIZE * sizeof(u32));
-            tls_os_task_create(NULL, "uart_1_rx", tls_uart_1_rx_task, (void *) uart, (void *) stk,  /* ÈÎÎñÕ»µÄÆðÊ¼µØÖ·
+            tls_os_task_create(NULL, "uart_1_rx", tls_uart_1_rx_task, (void *) uart, (void *) stk,  /* ä»»åŠ¡æ ˆçš„èµ·å§‹åœ°å€
                                                                                                      */
-                               UART1_RX_TASK_STK_SIZE * sizeof(u32),    /* ÈÎÎñÕ»µÄ´óÐ¡
+                               UART1_RX_TASK_STK_SIZE * sizeof(u32),    /* ä»»åŠ¡æ ˆçš„å¤§å°
                                                                          */
                                TLS_UART1_RX_TASK_PRIO, 0);
         }
@@ -733,7 +733,7 @@ static void parse_atcmd_line(struct tls_uart *uart)
             ptr_eol = parse_atcmd_eol(uart);
         // TLS_DBGPRT_INFO("ptr_eol = 0x%x\n", ptr_eol);
             if (!ptr_eol)
-            {                   // Ã»ÓÐ½áÊø·û£¬¿ÉÄÜÖ»ÊÕµ½°ë¸öÃüÁî
+            {                   // æ²¡æœ‰ç»“æŸç¬¦ï¼Œå¯èƒ½åªæ”¶åˆ°åŠä¸ªå‘½ä»¤
                 if (CIRC_CNT(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE) >
                     512)
                 {
@@ -745,7 +745,7 @@ static void parse_atcmd_line(struct tls_uart *uart)
                 }
                 break;
             }
-        // »ñÈ¡ÃüÁî³¤¶È
+        // èŽ·å–å‘½ä»¤é•¿åº¦
             if (ptr_eol >= atcmd_start)
             {
                 cmd_len = ptr_eol - atcmd_start;
@@ -1011,7 +1011,7 @@ static int cache_tcp_recv(struct tls_hostif_tx_msg *tx_msg)
     if (overflow)
         precvmit->tail = precvmit->head + 1;
 
-/* ¼ì²épbufµÄÊý¾ÝÊÇ·ñÒÑ¾­¶¼¿½±´µ½uart»º´æÁË */
+/* æ£€æŸ¥pbufçš„æ•°æ®æ˜¯å¦å·²ç»éƒ½æ‹·è´åˆ°uartç¼“å­˜äº† */
     if (tx_msg->offset >= p->tot_len)
     {
         pbuf_free(p);
@@ -1056,7 +1056,7 @@ static int uart_tcp_recv(struct tls_uart_port *port,
             break;
     };
 
-/* ¼ì²épbufµÄÊý¾ÝÊÇ·ñÒÑ¾­¶¼¿½±´µ½uart»º´æÁË */
+/* æ£€æŸ¥pbufçš„æ•°æ®æ˜¯å¦å·²ç»éƒ½æ‹·è´åˆ°uartç¼“å­˜äº† */
     if (tx_msg->offset >= p->tot_len)
     {
         pbuf_free(p);
@@ -1129,13 +1129,13 @@ static void uart_tx_timeout_check(struct tls_uart *uart)
     }
 }
 #endif
-/*¡¡
- * ´¦ÀíÁ÷³ÌËµÃ÷£º
- * Ê×ÏÈÅÐ¶ÏÉÏ´ÎµÄÍ¬²½Ö¡ÊÇ·ñÒÑ¾­´¦ÀíÍê³É£¬Èç¹ûÒÑ¾­´¦Àí½áÊø£¬
- *          Ôò¼ì²é»º´æheadÖ¸ÏòµÄ×Ö½Ú£¬ÅÐ¶ÏÊÇ·ñÊÇ0xAA(SYN_FLAG)£¬
- *          Èç¹ûÊÇ£¬Ôò¼ì²é»º´æµÄ³¤¶ÈÊÇ·ñ´óÓÚµÈÓÚ8£¬Èç¹û²»ÊÇ
- *          Ôò·µ»Ø£¬Èç¹ûÊÇ£¬ÔòÌáÈ¡×Ö½Ú±ê¼ÇºÍ³¤¶ÈÐÅÏ¢£¬Ð£ÑéÐÅÏ¢£¬
- *          ¼ÆËãÐ£ÑéºÍ£¬¼ì²éÐ£ÑéÖµÊÇ·ñÆ¥Åä£¬
+/*ã€€
+ * å¤„ç†æµç¨‹è¯´æ˜Žï¼š
+ * é¦–å…ˆåˆ¤æ–­ä¸Šæ¬¡çš„åŒæ­¥å¸§æ˜¯å¦å·²ç»å¤„ç†å®Œæˆï¼Œå¦‚æžœå·²ç»å¤„ç†ç»“æŸï¼Œ
+ *          åˆ™æ£€æŸ¥ç¼“å­˜headæŒ‡å‘çš„å­—èŠ‚ï¼Œåˆ¤æ–­æ˜¯å¦æ˜¯0xAA(SYN_FLAG)ï¼Œ
+ *          å¦‚æžœæ˜¯ï¼Œåˆ™æ£€æŸ¥ç¼“å­˜çš„é•¿åº¦æ˜¯å¦å¤§äºŽç­‰äºŽ8ï¼Œå¦‚æžœä¸æ˜¯
+ *          åˆ™è¿”å›žï¼Œå¦‚æžœæ˜¯ï¼Œåˆ™æå–å­—èŠ‚æ ‡è®°å’Œé•¿åº¦ä¿¡æ¯ï¼Œæ ¡éªŒä¿¡æ¯ï¼Œ
+ *          è®¡ç®—æ ¡éªŒå’Œï¼Œæ£€æŸ¥æ ¡éªŒå€¼æ˜¯å¦åŒ¹é…ï¼Œ
  */
 static int ricmd_handle_sync(struct tls_uart *uart,
                              struct tls_uart_circ_buf *recv)
@@ -1153,13 +1153,13 @@ static int ricmd_handle_sync(struct tls_uart *uart,
 
     if (!(port->inputstate & INS_SYNC_CHAR))
     {
-    /* ¶ÔÉÏ´Î½ÓÊÕµÄÊý¾Ý£¬Ã»ÓÐSYN±ê¼ÇÐèÒªµÈ´ý´¦Àí */
+    /* å¯¹ä¸Šæ¬¡æŽ¥æ”¶çš„æ•°æ®ï¼Œæ²¡æœ‰SYNæ ‡è®°éœ€è¦ç­‰å¾…å¤„ç† */
         if (recv->buf[recv->head] == RICMD_SYNC_FLAG)
         {
             numbytes = CIRC_CNT(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE);
             if (numbytes < 8)
             {
-            /* ÏÈ²»´¦Àí */
+            /* å…ˆä¸å¤„ç† */
                 skip_count = 0;
                 return skip_count;
             }
@@ -1238,7 +1238,7 @@ static int ricmd_handle_sync(struct tls_uart *uart,
                 else
                 {
                     TLS_DBGPRT_INFO("crc check failed, drop the char\n");
-                /* crc ´íÎó£¬ºöÂÔÊÕµ½µÄ×Ö·û£¬¼ÌÐø´¦ÀíºóÃæµÄ×Ö·û */
+                /* crc é”™è¯¯ï¼Œå¿½ç•¥æ”¶åˆ°çš„å­—ç¬¦ï¼Œç»§ç»­å¤„ç†åŽé¢çš„å­—ç¬¦ */
                 }
             }
         }
@@ -1334,7 +1334,7 @@ void parse_ricmd_line(struct tls_uart *uart)
         }
         else
         {
-        /* Ã»ÓÐÐèÒª´¦ÀíµÄÊý¾Ý(µÚÒ»¸ö×Ö·û²»ÊÇSYNC_FLAG)£¬¶øÇÒÒÔÇ°µÄ°üÒÑ¾­´¦ÀíÍê³É
+        /* æ²¡æœ‰éœ€è¦å¤„ç†çš„æ•°æ®(ç¬¬ä¸€ä¸ªå­—ç¬¦ä¸æ˜¯SYNC_FLAG)ï¼Œè€Œä¸”ä»¥å‰çš„åŒ…å·²ç»å¤„ç†å®Œæˆ
          */
             procbytes = skip_count;
         }
